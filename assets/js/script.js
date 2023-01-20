@@ -39,17 +39,23 @@ function generatePassword() {
     // converting what is entered in prompt to a number between 8 and 128. 
 
     // passLength = parseInt(passLength);
-    var passLength = parseInt(prompt("How many characters would you like your password?"));
-    if (passLength < 8) {
-        alert("Password length should be atleast 8 characters.");
-        return null;
+    var passLength = parseInt(prompt("Choose a password length between 8 and 128 characters."));
+    if (isNaN(passLength)) {
+        alert("Please enter a number between 8 and 128.")
+        return generatePassword();
     }
-    if (passLength > 128) {
-        alert("Password length must be less than 129 characters.");
-        return null;
+    // if (passLength < 8) {
+    //     alert("Password length should be atleast 8 characters.");
+    //     return null;
+    // }
+    // if (passLength > 128) {
+    //     alert("Password length must be less than 129 characters.");
+    //     return null;
+    // }
+    if (passLength < 8 || passLength > 128) {
+        alert("Your password must be between 8 and 128 characters");
+        return generatePassword();
     }
-    // if (passLength < 8 || passLength > 128) {
-    //     alert("Your password must be between 8 and 128 characters");
 
     //     // the return stops the function from generating a password even if the condition wasn't met 
 
@@ -93,20 +99,24 @@ function generatePassword() {
         var passChars = randomChoice(passChar);
     
         result.push(passChars);
-      };
-      for (var i = 0; i < guaranteedChar.length; i++) {
+    };
+
+    for (var i = 0; i < guaranteedChar.length; i++) {
         result[i] = guaranteedChar[i];
-      };
+    };
+
+    if (!passChar.length) {
+        alert("Please select atleast one option.");
+        return generatePassword();
+    };
+
 
       return result.join('');
 
     // the ! checks to see if there is any length of characters inside passChar. 
     // If there is no length the the following alert message will be displayed 
 
-    // if (!passChar.length) {
-    //     alert("Please press generate button again and say yes to atleast one option.");
-    //     return;
-    // };
+    
 
     // let passChar = "!@#$%&abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; 
     // let genPass = "";
